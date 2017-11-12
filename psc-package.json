@@ -1,0 +1,12 @@
+{
+    "name": "untitled",
+    "set": "karaage",
+    "source": "https://github.com/justinwoo/package-sets.git",
+    "depends": [
+        "simple-json",
+        "psci-support",
+        "console",
+        "eff",
+        "prelude"
+    ]
+}
