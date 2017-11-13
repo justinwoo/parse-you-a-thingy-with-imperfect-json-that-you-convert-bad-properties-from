@@ -9,10 +9,8 @@ import Data.Foreign (ForeignError)
 import Data.List.NonEmpty (NonEmptyList)
 import Data.Maybe (fromMaybe)
 import Data.Nullable as Nullable
-import Data.Record (modify)
 import Global.Unsafe (unsafeStringify)
 import Simple.JSON (readJSON)
-import Type.Prelude (SProxy(..))
 
 type MyThingy =
   { a :: String
@@ -39,8 +37,10 @@ myThingyJsonThing2 =
 -- you can look at the definition of modify in purescript-record to see how the types line up!
 parseMyThingyJsonFromImperfectJsonButConvertTheDirtyProperty ::
   String -> Either (NonEmptyList ForeignError) MyThingy
-parseMyThingyJsonFromImperfectJsonButConvertTheDirtyProperty str =
-  modify (SProxy :: SProxy "b") (fromMaybe [] <<< Nullable.toMaybe) <$> readJSON str
+parseMyThingyJsonFromImperfectJsonButConvertTheDirtyProperty str = do
+  json <- readJSON str
+  let b = fromMaybe [] <<< Nullable.toMaybe $ json.b
+  pure $ json { b = b }
 
 
 main :: forall e. Eff (console :: CONSOLE | e) Unit
