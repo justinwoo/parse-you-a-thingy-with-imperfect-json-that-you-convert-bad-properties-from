@@ -33,8 +33,6 @@ myThingyJsonThing2 =
     }
   """
 
--- by using modify here, the type that is being parsed here uses "b" :: Nullable (Array String) from simple-json!
--- you can look at the definition of modify in purescript-record to see how the types line up!
 parseMyThingyJsonFromImperfectJsonButConvertTheDirtyProperty ::
   String -> Either (NonEmptyList ForeignError) MyThingy
 parseMyThingyJsonFromImperfectJsonButConvertTheDirtyProperty str = do
